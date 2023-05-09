@@ -1,0 +1,2 @@
+item_sku_id,int_org_num,pur_bill_id,create_tm,complete_dt,vlt_actual,actual_pur_qtty,item_first_cate_cd,item_second_cate_cd,item_third_cate_cd,brand_code,create_day_of_week,(item_dim_info ),(item_historical_vlt_stats),(item_historical_qtty_stats),(vendor_historical_vlt_stats),(vendor_historical_quantity_stats)
+111111,1,11111111,3/19/19 14:27,3/24/19 13:45,4.970532407,48,1111,1111,1111,1111,2,,,,,
