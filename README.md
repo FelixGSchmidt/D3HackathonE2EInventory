@@ -16,11 +16,11 @@ D3 onsite (May 11-12 2023) hackathon on replicating the implementation of the pa
 
 **Data description (experiment)**
 1.	Dataset "df_test.csv": 
-- Dataset description: a subset of data (3000 SKUs) that used for testing the various inventory replenishment model performance in the offline experiment.
-- Dataset dictionary: 
--- “SKU”: disguised SKU ID
--- “demand_mean”: average demand of the SKU
--- “demand_std”: standard deviation of demand of the SKU
+  - Dataset description: a subset of data (3000 SKUs) that used for testing the various inventory replenishment model performance in the offline experiment.
+  - Dataset dictionary: 
+    - “SKU”: disguised SKU ID
+    - “demand_mean”: average demand of the SKU
+    - “demand_std”: standard deviation of demand of the SKU
 	“review_period”: item review period 
 	“vendor_vlt_mean”: average vendor lead time 
 	“vendor_vlt_std”: standard deviation of vendor lead time 
