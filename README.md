@@ -7,7 +7,8 @@ D3 onsite (May 11-12 2023) hackathon on replicating the implementation of the pa
 1. “original_E2E_section4.pdf”: output of running “E2E_Section4.ipynb” using original data. This is the reproduce of Figure 2.
 
 2. “original_field_experiment.pdf”: output of running “propensity_score_matching.ipynb” and part of “field_experiment_summary.ipynb”: reproduce Figure 3 and Table 2 and 3.
-  Remarks: we separate “propensity_score_matching.ipynb” in the puiblished version is because we want to avoid sharing the sales data of all products in candidate control group. One only needs average demand and average VLT data to do propensity score matching.
+
+- Remarks: we separate “propensity_score_matching.ipynb” in the puiblished version is because we want to avoid sharing the sales data of all products in candidate control group. One only needs average demand and average VLT data to do propensity score matching.
 
 3. “original_field_experiment_summary.ipynb”: remaining part of “field_experiment_summary.ipynb”: reproduce Table 4.
 
