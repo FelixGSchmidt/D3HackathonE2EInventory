@@ -21,45 +21,46 @@ D3 onsite (May 11-12 2023) hackathon on replicating the implementation of the pa
     - “SKU”: disguised SKU ID
     - “demand_mean”: average demand of the SKU
     - “demand_std”: standard deviation of demand of the SKU
-	“review_period”: item review period 
-	“vendor_vlt_mean”: average vendor lead time 
-	“vendor_vlt_std”: standard deviation of vendor lead time 
-	“initial_stock”: initial inventory level
-	“demand_hist”: historical demand 
-	“OPT_pred”: offline optimal solution given the realized demand and vlt in the test period
-	“E2E_RNN_pred”: replenishment quantity predicted by the proposed E2E model
-	“gbm_pred_pred”: replenishment quantity predicted by the LightGBM model
-	“sf_rnn”: demand forecasting series outputted by the proposed E2E model
-	“vlt”: vlt forecast outputted by the proposed E2E model
-•	The original dataset has the same dictionaries.
-•	Disguise process: desensitization of the SKU ID. We also randomly sample a subset of 3000 SKU from the original dataset because the original dataset is too large to disclose. 
-2.	Datasets “order_e2e_post_500.csv”, “order_e2e_post_500.csv”, “order_e2e_post_500.csv” and “order_e2e_post_500.csv”.
-•	Dataset description: “order_e2e_post_500.csv” and “order_e2e_post_500.csv” include post- and pre- experiment results, respectively, for a subset of the treatment group (500 SKU-DC pairs). “order_e2e_post_500.csv” and “order_e2e_post_500.csv” include post- and pre- experiment results, respectively, for a subset (500 SKU-DC pairs) of the control group. Note that the control group has been selected from all candidate SKU-DC pairs in the same category by propensity score matching.
-•	Data dictionary: 
-	“sku_dc_pair_index”: desensitized index for each of the (SKU, DC) pair
-	“complete_tm”: order complete time
-	“order_amount”: order amount (replenishment quantities)
-	“test_inv”: inventory curve within test period
-	“test_demand”: demand observations within test period
-	“ave_demand”: average demand
-	“ave_inv”: average inventory level
-	“vlt”: vendor lead time
-	“vlt_num”: extracted value of vendor lead time
-•	Dataset dictionaries of original datasets:
-	Two columns “SKU_id”:  SKU ID and “DC”: distribution center ID instead of “sku_dc_pair_index”.
-	Other columns are the same as the disguised dataset
-•	Disguise process: The sku_dc_pair_index has been desensitized to disguise the original SKU name and DC ID. We randomly sampled 500 (SKU,DC) pairs for the treatment group because the original dataset is too large to be disclosed.
-3.	Dataset “control_demand_vlt.csv”：
-•	Dataset discerption:  These (SKU, DC) pairs are all candidate pairs that can be selected as the control group. The propensity score matching are performed on this dataset to select a control group to reduce the potential selection bias.
-•	Dataset dictionary:
-	Index: (SKU, DC) pair index
-	“ave_demand”: average demand
-	“vlt_num”: vendor lead time value 
-•	Dataset dictionaries of original datasets:
-	Two additional columns “SKU_id”:  SKU ID and “DC”: distribution center ID 
-	Other columns are the same as the disguised dataset
-•	Disguise process: we desensitized the original SKU name and DC ID and give each (SKU, DC) pair an index. 
-Data description (model)
+    - “review_period”: item review period 
+    - “vendor_vlt_mean”: average vendor lead time 
+    - “vendor_vlt_std”: standard deviation of vendor lead time 
+    - “initial_stock”: initial inventory level
+    - “demand_hist”: historical demand 
+    - “OPT_pred”: offline optimal solution given the realized demand and vlt in the test period
+    - “E2E_RNN_pred”: replenishment quantity predicted by the proposed E2E model
+    - “gbm_pred_pred”: replenishment quantity predicted by the LightGBM model
+    - “sf_rnn”: demand forecasting series outputted by the proposed E2E model
+    - “vlt”: vlt forecast outputted by the proposed E2E model
+  - The original dataset has the same dictionaries.
+  - Disguise process: desensitization of the SKU ID. We also randomly sample a subset of 3000 SKU from the original dataset because the original dataset is too large to disclose. 
+2. Datasets “order_e2e_post_500.csv”, “order_e2e_post_500.csv”, “order_e2e_post_500.csv” and “order_e2e_post_500.csv”.
+  - Dataset description: “order_e2e_post_500.csv” and “order_e2e_post_500.csv” include post- and pre- experiment results, respectively, for a subset of the treatment group (500 SKU-DC pairs). “order_e2e_post_500.csv” and “order_e2e_post_500.csv” include post- and pre- experiment results, respectively, for a subset (500 SKU-DC pairs) of the control group. Note that the control group has been selected from all candidate SKU-DC pairs in the same category by propensity score matching.
+  - Data dictionary: 
+    - “sku_dc_pair_index”: desensitized index for each of the (SKU, DC) pair
+    - “complete_tm”: order complete time
+    - “order_amount”: order amount (replenishment quantities)
+    - “test_inv”: inventory curve within test period
+    - “test_demand”: demand observations within test period
+    - “ave_demand”: average demand
+    - “ave_inv”: average inventory level
+    - “vlt”: vendor lead time
+    - “vlt_num”: extracted value of vendor lead time
+  - Dataset dictionaries of original datasets:
+    - Two columns “SKU_id”:  SKU ID and “DC”: distribution center ID instead of “sku_dc_pair_index”.
+    - Other columns are the same as the disguised dataset
+  - Disguise process: The sku_dc_pair_index has been desensitized to disguise the original SKU name and DC ID. We randomly sampled 500 (SKU,DC) pairs for the treatment group because the original dataset is too large to be disclosed.
+3. Dataset “control_demand_vlt.csv”：
+  - Dataset discerption:  These (SKU, DC) pairs are all candidate pairs that can be selected as the control group. The propensity score matching are performed on this dataset to select a control group to reduce the potential selection bias.
+  - Dataset dictionary:
+    - Index: (SKU, DC) pair index
+    - “ave_demand”: average demand
+    - “vlt_num”: vendor lead time value 
+  - Dataset dictionaries of original datasets:
+    - Two additional columns “SKU_id”:  SKU ID and “DC”: distribution center ID 
+    - Other columns are the same as the disguised dataset
+  - Disguise process: we desensitized the original SKU name and DC ID and give each (SKU, DC) pair an index. 
+
+**Data description (model)**
 1.	Dataset "rdc_sales_1320.csv": 
 •	Dataset description: a disguised example data set (5 SKU-DC pairs) for daily sales. 
 •	Dataset dictionary: 
