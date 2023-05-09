@@ -61,55 +61,55 @@ D3 onsite (May 11-12 2023) hackathon on replicating the implementation of the pa
   - Disguise process: we desensitized the original SKU name and DC ID and give each (SKU, DC) pair an index. 
 
 **Data description (model)**
-1.	Dataset "rdc_sales_1320.csv": 
-•	Dataset description: a disguised example data set (5 SKU-DC pairs) for daily sales. 
-•	Dataset dictionary: 
-	“row”: disguised SKU-DC ID (format: SKU_ID#DC_ID)
-	Other than “row”, the following columns represents daily sales data. The index of each column was converted to date-time format in “data_parser.py”.
-•	The original dataset has the same dictionaries.
-•	Disguise process: desensitization of the SKU ID and DC ID. We also randomly sample a subset of 5 SKU from the original dataset to give an example. 
-2.	Dataset “stock.csv”:
-•	Dataset description: “stock.csv” is a disguised example data set for stock levels in the warehouse. 
-•	Data dictionary: 
-	“item_sku_id”: disguised SKU-DC ID (format: SKU_ID#DC_ID)
-	Other than “row”, the following columns represents daily stock-level data. Each column is indexed with date. 
-•	The original dataset includes longer record of stock level. The provided data set is trimmed to one month. 
-•	Disguise process: desensitization of the SKU ID and DC ID. 2 SKUs are randomly picked from the original dataset and is trimmed to be one-month long.
-3.	Dataset “vlt_2019_0305.csv”：
-•	Dataset discerption: a disguised example dataset for vendor lead time. 
-•	Dataset dictionary:
-	“item_sku_id”: disguised SKU- ID 
-	“int_org_num”: disguised DC-ID
-	“pur_bill_id”: purchase bill ID.
-	“create_tm” and “complete_tm”: create time and complete time.
-	“vlt_actual”: actual vendor lead time (equals to complete time – create time).
-	“actual_pur_qtty”: actual purchase quantity.
-	“item_first_cate_cd”, “item_second_cate_cd”, “item_third_cate_cd”: item first, second, and third category ID.
-	“brand_code”: brand code.
-	“create_day_of_week”: create day of the week.
-	Disguised volumn names for three groups of features: item dimension information (e.g. weight, height, length), item-wise and vendor-wise historical VLT statistics (e.g. averaged VLT over certain time window, standard deviation of VLT ), statistics of item historical purchase quantities (e.g. averaged purchase quantity over certain time windows).
-•	Dataset dictionaries of original datasets:
-	More column corresponding to item dimension information, item-wise and vendor-wise historical VLT statistics. The column names should be consistent with “VLT_FEA” defined in config/config.py
-	Other columns are the same as the disguised dataset
-•	Disguise process: we desensitized the original SKU name and DC ID and remove confidential column names. The data set contains on SKU-DC pair as an example. 
-Code (experiment)
-1.	“E2E_Section4.ipynb”: reproduce Figure 2
-•	Same code applies on the disguised and undisguised data. 
-•	Description: Offline comparisons of seven different inventory replenishment models. As only a subset of the entire test dataset is allowed to share due to business reasons. The reproduced results have different numerical value compared to the results in Section 4.2 that are obtained on the entire test dataset. However, all the observed trend, relative performance comparison and conclusion remain the same.
-2.	“propensity_score_matching.ipynb”: reproduce Figure 3
-•	Same code applies on the disguised and undisguised data.
-•	Description: Demonstration of using propensity score matching to select the control group out of all candidate SKU-DC pairs.  As we only provide a subset of the treatment group, the propensity score density plots are different than plots in the paper. But it still has a perfect matching. 
-3.	“field_experiment_summary.ipynb”: reproduce Table 2,3 and 4
-•	Same code applies on the disguised and undisguised data
-•	Description: evaluates five inventory performance metrics for both the treatment and control groups for the pre-experiment periods and post-experiment periods. This notebook also demonstrates the result of the t-test, linear regression and Difference-in-Difference estimation. As we only can share a subset of the dataset, the numerical value is different from the results in Section 5 but the conclusion remains the same.
-Code (model)
+1. Dataset "rdc_sales_1320.csv": 
+  - Dataset description: a disguised example data set (5 SKU-DC pairs) for daily sales. 
+  - Dataset dictionary: 
+    - “row”: disguised SKU-DC ID (format: SKU_ID#DC_ID)
+    - Other than “row”, the following columns represents daily sales data. The index of each column was converted to date-time format in “data_parser.py”.
+  - The original dataset has the same dictionaries.
+  - Disguise process: desensitization of the SKU ID and DC ID. We also randomly sample a subset of 5 SKU from the original dataset to give an example. 
+2. Dataset “stock.csv”:
+  - Dataset description: “stock.csv” is a disguised example data set for stock levels in the warehouse. 
+  - Data dictionary: 
+    - “item_sku_id”: disguised SKU-DC ID (format: SKU_ID#DC_ID)
+    - Other than “row”, the following columns represents daily stock-level data. Each column is indexed with date. 
+  - The original dataset includes longer record of stock level. The provided data set is trimmed to one month. 
+  - Disguise process: desensitization of the SKU ID and DC ID. 2 SKUs are randomly picked from the original dataset and is trimmed to be one-month long.
+3. Dataset “vlt_2019_0305.csv”：
+  - Dataset discerption: a disguised example dataset for vendor lead time. 
+  - Dataset dictionary:
+    - “item_sku_id”: disguised SKU- ID 
+    - “int_org_num”: disguised DC-ID
+    - “pur_bill_id”: purchase bill ID.
+    - “create_tm” and “complete_tm”: create time and complete time.
+    - “vlt_actual”: actual vendor lead time (equals to complete time – create time).
+    - “actual_pur_qtty”: actual purchase quantity.
+    - “item_first_cate_cd”, “item_second_cate_cd”, “item_third_cate_cd”: item first, second, and third category ID.
+    - “brand_code”: brand code.
+    - “create_day_of_week”: create day of the week.
+    - Disguised volumn names for three groups of features: item dimension information (e.g. weight, height, length), item-wise and vendor-wise historical VLT statistics (e.g. averaged VLT over certain time window, standard deviation of VLT ), statistics of item historical purchase quantities (e.g. averaged purchase quantity over certain time windows).
+  - Dataset dictionaries of original datasets:
+    - More column corresponding to item dimension information, item-wise and vendor-wise historical VLT statistics. The column names should be consistent with “VLT_FEA” defined in config/config.py
+    - Other columns are the same as the disguised dataset
+  - Disguise process: we desensitized the original SKU name and DC ID and remove confidential column names. The data set contains on SKU-DC pair as an example. 
+
+**Code (experiment)**
+1. “E2E_Section4.ipynb”: reproduce Figure 2
+  - Same code applies on the disguised and undisguised data. 
+  - Description: Offline comparisons of seven different inventory replenishment models. As only a subset of the entire test dataset is allowed to share due to business reasons. The reproduced results have different numerical value compared to the results in Section 4.2 that are obtained on the entire test dataset. However, all the observed trend, relative performance comparison and conclusion remain the same.
+2. “propensity_score_matching.ipynb”: reproduce Figure 3
+  - Same code applies on the disguised and undisguised data.
+  - Description: Demonstration of using propensity score matching to select the control group out of all candidate SKU-DC pairs.  As we only provide a subset of the treatment group, the propensity score density plots are different than plots in the paper. But it still has a perfect matching. 
+3. “field_experiment_summary.ipynb”: reproduce Table 2,3 and 4
+  - Same code applies on the disguised and undisguised data
+  - Description: evaluates five inventory performance metrics for both the treatment and control groups for the pre-experiment periods and post-experiment periods. This notebook also demonstrates the result of the t-test, linear regression and Difference-in-Difference estimation. As we only can share a subset of the dataset, the numerical value is different from the results in Section 5 but the conclusion remains the same.
+  
+**Code (model)**
 The folder “E2E-model-code” includes code and pseudo-code for constructing and training the End-to-End model with RNN.
 Due to confidentiality, certain parts of the source code are replaced with pseudo-code or detailed description.
 Disguised parts:
-1.	“config/config.py”: Details of feature names and RNN parameters are disguised. 
-2.	“data_loader/data_parser.py”: Disguised input and output paths. Disguised value of some parameters. Disguised data cleaning and preprocessing details in functions “add_target” and “dummy_cut”.
-3.	“models/loss.py”: Disguised weight parameters in training loss functions. Disguised details of choice of loss function. 
-4.	“models/model.py”: Disguised initialization of weights. Disguised feature dimensions. 
-5.	“utils/demand_pkg.py”: Window lists used in features are disguised.  
-
-![image](https://github.com/FelixGSchmidt/D3HackathonE2EInventory/assets/51131718/ea3f90a6-4135-4c41-8a99-f1ecc28ab520)
+1. “config/config.py”: Details of feature names and RNN parameters are disguised. 
+2. “data_loader/data_parser.py”: Disguised input and output paths. Disguised value of some parameters. Disguised data cleaning and preprocessing details in functions “add_target” and “dummy_cut”.
+3. “models/loss.py”: Disguised weight parameters in training loss functions. Disguised details of choice of loss function. 
+4. “models/model.py”: Disguised initialization of weights. Disguised feature dimensions. 
+5. “utils/demand_pkg.py”: Window lists used in features are disguised.  
